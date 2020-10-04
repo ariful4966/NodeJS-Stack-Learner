@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+require('dotenv').config()
 
 const router =require('./routes');
 
@@ -40,7 +41,7 @@ app.get('/', (req, res) => {
 })
 
 const port = process.env.port || 8080;
-const uri = `mongodb+srv://nodedb:node82db@cluster0.nine7.mongodb.net/nodedb?retryWrites=true&w=majority`;
+const uri = process.env.DB_PATH;
 
 
 

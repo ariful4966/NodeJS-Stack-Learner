@@ -59,11 +59,13 @@ exports.createContact = (req, res) => {
 
 
     if (id) {
-        Contact.findOneAndUpdate(
-            {  _id:id},
+        Contact.findOneAndUpdate({
+            _id : id
+        },
+            
             {
                 $set: {
-                    
+
                     name,
                     email,
                     phone
@@ -71,23 +73,19 @@ exports.createContact = (req, res) => {
                 }
             }
         )
-        // .then((data) => {
-        //     console.log(data)
-        //     Contact.find()
-                
-        // })
-        .then(()=>{
-            Contact.find()
-            .then(contacts => {
-                return res.render('index', { contacts, error })
+
+            .then(() => {
+                Contact.find()
+                    .then(contacts => {
+                        res.render('index', { contacts, error: {} })
+                    })
             })
-        })
-        .catch(e => {
-            console.log(e);
-            return res.json({
-                message: 'Error Occureed Faild'
+            .catch(e => {
+                console.log(e);
+                return res.json({
+                    message: 'Error Occureed Faild'
+                })
             })
-        })
     } else {
         let contact = new Contact({
             name,
