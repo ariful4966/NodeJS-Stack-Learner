@@ -8,7 +8,7 @@
     "start": "nodemon app.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Ariful Islam",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.0",
@@ -19,6 +19,6 @@
     "morgan": "^1.10.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.5"
   }
 }
