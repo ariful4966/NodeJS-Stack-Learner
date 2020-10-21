@@ -8,7 +8,7 @@
                 <form action="/auth/login" method="POST">
                     <div class="form-group">
                         <label for="email">Enter Your Email</label>
-                        <input type="email" name="email" id="email"
+                        <input type="text" name="email" id="email"
                             class="form-control <%= error.email ? 'is-invalid' : '' %> ">
                         <div class="invalid-feedback">
                             <%= error.email && error.email %>
@@ -23,6 +23,7 @@
                         </div>
                     </div>
                     <input type="submit" class="btn btn-primary" value="Login">
+                    
                 </form>
                 <a href="/auth/signup" class="my-3 text-center">Don't have an Account? Create One</a>
             </div>

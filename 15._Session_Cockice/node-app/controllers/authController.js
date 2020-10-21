@@ -48,10 +48,13 @@ exports.signupPostController = async (req, res, next) => {
 
 
 exports.loginGetController = (req, res, next) => {
+    console.log(req.session.isLoggedIn, req.session.user)
+
     res.render('pages/auth/login', { title: 'Login to Your Account', error: {} })
 }
 exports.loginPostController = async (req, res, next) => {
     let { email, password } = req.body
+
 
     let errors = validationResult(req).formatWith(errorFormatter)
     if (!errors.isEmpty()) {
@@ -59,13 +62,13 @@ exports.loginPostController = async (req, res, next) => {
             {
                 title: 'Login To Your Account',
                 error: errors.mapped(),
-
+                isLoggedIn
             })
     }
 
     try {
         let user = await User.findOne({ email })
-        if (!user) { 
+        if (!user) {
             return res.json({
                 message: "Invalid Creadential"
             })
@@ -76,8 +79,17 @@ exports.loginPostController = async (req, res, next) => {
                 message: "Invalid Creadential"
             })
         }
-        res.setHeader('Set-Cookie', 'isLoggedIn = true')
-        res.render('pages/auth/login', { title: 'Login to Your Account', error: {}})
+
+        req.session.isLoggedIn = true
+        req.session.user = user
+        req.session.save(err => {
+            if (err) {
+                console.log(err)
+                return next(err)
+            }
+            res.redirect('/dashboard')
+        })
+        res.render('pages/auth/login', { title: 'Login to Your Account', error: {} })
     } catch (e) {
         console.log(e)
         next(e)
@@ -85,5 +97,11 @@ exports.loginPostController = async (req, res, next) => {
 }
 
 exports.logoutController = (req, res, next) => {
-
+    req.session.destroy(err => {
+        if (err) {
+            console.log(err)
+            return next(err)
+        }
+        return res.redirect('/auth/login')    
+    })
 }
