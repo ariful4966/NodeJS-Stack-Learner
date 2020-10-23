@@ -1,0 +1,30 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "install",
+			"path": "node-app/",
+			"problemMatcher": [],
+			"label": "npm: install - node-app",
+			"detail": "install dependencies from package"
+		},
+		{
+			"type": "npm",
+			"script": "start",
+			"path": "node-app/",
+			"problemMatcher": [],
+			"label": "npm: start - node-app",
+			"detail": "nodemon app.js"
+		},
+		{
+			"type": "npm",
+			"script": "test",
+			"path": "node-app/",
+			"group": "test",
+			"problemMatcher": [],
+			"label": "npm: test - node-app",
+			"detail": "echo \"Error: no test specified\" && exit 1"
+		}
+	]
+}
